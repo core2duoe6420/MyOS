@@ -1,0 +1,61 @@
+
+Discarded input sections
+
+ .comment       0x0000000000000000       0x2d init.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 init.o
+ .comment       0x0000000000000000       0x2d printf.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 printf.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.start          0x0000000008000000       0x82
+ *(.start)
+ .start         0x0000000008000000       0x82 init.o
+                0x0000000008000000                main
+
+.text           0x0000000008000090      0x66e
+ *(.text)
+ .text          0x0000000008000090       0xb3 init.o
+                0x0000000008000090                fork
+                0x00000000080000a4                gets
+                0x00000000080000b5                pause
+                0x00000000080000c1                strlen
+                0x00000000080000db                strcmp
+ *fill*         0x0000000008000143        0xd 00
+ .text          0x0000000008000150      0x5ae printf.o
+                0x000000000800036f                vsprintf
+                0x00000000080006c7                printf
+
+.data           0x0000000008000700        0x0 load address 0x00000000080006fe
+ *(.data)
+ .data          0x0000000008000700        0x0 init.o
+ .data          0x0000000008000700        0x0 printf.o
+
+.rodata         0x0000000008000700      0x135
+ *(.rodata)
+ .rodata        0x0000000008000700       0xc8 printf.o
+ *(.rodata*)
+ .rodata.str1.1
+                0x00000000080007c8       0x20 init.o
+ .rodata.str1.4
+                0x00000000080007e8       0x4d printf.o
+
+.bss            0x0000000008000840      0x400
+ *(.bss)
+ .bss           0x0000000008000840        0x0 init.o
+ .bss           0x0000000008000840      0x400 printf.o
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.comment)
+LOAD init.o
+LOAD printf.o
+OUTPUT(init.bin binary)

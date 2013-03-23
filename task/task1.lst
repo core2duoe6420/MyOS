@@ -1,0 +1,43 @@
+
+Discarded input sections
+
+ .comment       0x0000000000000000       0x2d task1.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 task1.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+
+.start          0x0000000008000000       0x40
+ *(.start)
+ .start         0x0000000008000000       0x40 task1.o
+                0x0000000008000000                main
+
+.text           0x0000000008000040        0x0
+ *(.text)
+ .text          0x0000000008000040        0x0 task1.o
+
+.data           0x0000000008000040        0x0
+ *(.data)
+ .data          0x0000000008000040        0x0 task1.o
+
+.rodata         0x0000000008000040        0x2
+ *(.rodata)
+ *(.rodata*)
+ .rodata.str1.1
+                0x0000000008000040        0x2 task1.o
+
+.bss            0x0000000008000044        0x0 load address 0x0000000008000042
+ *(.bss)
+ .bss           0x0000000008000044        0x0 task1.o
+
+/DISCARD/
+ *(.note.GNU-stack)
+ *(.comment)
+LOAD task1.o
+OUTPUT(task1.bin binary)

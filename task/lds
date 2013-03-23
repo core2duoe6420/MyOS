@@ -1,0 +1,11 @@
+OUTPUT_FORMAT(binary)
+ENTRY(main)
+SECTIONS
+{
+.start 0x8000000 : { *(.start) }
+.text : { *(.text) }
+.data : { *(.data) }
+.rodata : { *(.rodata) *(.rodata*) }
+.bss : { *(.bss) }
+/DISCARD/ : { *(.note.GNU-stack) *(.comment) }
+} 
