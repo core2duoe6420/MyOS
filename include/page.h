@@ -5,7 +5,7 @@
 #include <lib.h>
 
 #define PAGE_KERNEL 0x80000000 /* for kernel */
-#define PAGE_PDE 0x40000000 /* for pde */ 
+#define PAGE_PDE 0x40000000 /* for pde */
 #define PAGE_PTE 0x20000000 /* for pte */
 #define PAGE_TASK_STRUCT 0x10000000 /* for task struct */
 #define PAGE_TASK_CODE 0x08000000
@@ -23,7 +23,7 @@
 #define address_to_page(address) \
 	(PAGE_STRUCT_ENTRY+address_to_index(address))
 
-/* the following two macro can only be used in kernel code 
+/* the following two macro can only be used in kernel code
  * for kernel page table is continuous */
 #define clear_present(index) \
 do{ \
@@ -38,33 +38,34 @@ do{ \
 }while(0)
 
 
-struct page_struct{
-	uint32 flags;
-	uint32 count;
-	struct page_struct *next;
-	struct page_struct *prev;
+struct page_struct {
+    uint32 flags;
+    uint32 count;
+    struct page_struct *next;
+    struct page_struct *prev;
 };
 
-struct pagelist{
-	struct page_struct *first;
-	int nr;
+struct pagelist {
+    struct page_struct *first;
+    int nr;
 };
 
-struct mm_struct{
-	struct pagelist code;
-	struct pagelist data;
-	struct pagelist stack;
-	struct pagelist pde;
-	struct pagelist pte;
+struct mm_struct {
+    struct pagelist code;
+    struct pagelist data;
+    struct pagelist stack;
+    struct pagelist pde;
+    struct pagelist pte;
 };
 
 extern struct pagelist freepage;
 
 extern int free_page(struct page_struct* page);
-extern struct page_struct * alloc_page(int order,int flags);
+extern struct page_struct * alloc_page(int order, int flags);
 
-inline int get_free_page_info(){
-	printk("page available:%d frames\n",freepage.nr);
-	return freepage.nr;
+inline int get_free_page_info()
+{
+    printk("page available:%d frames\n", freepage.nr);
+    return freepage.nr;
 }
 #endif

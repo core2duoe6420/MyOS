@@ -22,26 +22,26 @@ typedef unsigned long size_t;
 #undef NULL
 #define NULL ((void *)0)
 
-struct queue{
-	volatile int flags;
-	int head;
-	int tail;
-	int size;
-	struct task_struct *wait;
-	char value[PAGE_SIZE-sizeof(int)*5];
+struct queue {
+    volatile int flags;
+    int head;
+    int tail;
+    int size;
+    struct task_struct *wait;
+    char value[PAGE_SIZE - sizeof(int) * 5];
 };
 struct queue* new_queue();
-void enqueue(struct queue* q,char value);
+void enqueue(struct queue* q, char value);
 char dequeue(struct queue*q);
 
-struct stack{
-	volatile int flags;
-	int top;
-	struct task_struct *wait;
-	char value[PAGE_SIZE-sizeof(int)*3];
+struct stack {
+    volatile int flags;
+    int top;
+    struct task_struct *wait;
+    char value[PAGE_SIZE - sizeof(int) * 3];
 };
 struct stack* new_stack();
-void push(struct stack *s,char value);
+void push(struct stack *s, char value);
 char pop(struct stack *s);
 char peek(struct stack *s);
 

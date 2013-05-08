@@ -49,7 +49,7 @@
 #define PAGE_STRUCT_START (__va(0x200000))
 #define PAGE_STRUCT_ENTRY (struct page_struct*)PAGE_STRUCT_START
 #define PAGE_STRUCT_SIZE (sizeof(struct page_struct)*PAGE_NR)
-#define PAGE_STRUCT_END (PAGE_STRUCT_START+PAGE_STRUCT_SIZE-1) 
+#define PAGE_STRUCT_END (PAGE_STRUCT_START+PAGE_STRUCT_SIZE-1)
 
 
 #endif

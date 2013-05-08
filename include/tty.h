@@ -6,12 +6,12 @@
 
 #include <sched.h>
 #include <lib.h>
-struct tty_struct{
-	char map[TTY_MAP_SIZE];
-	int cur_x;
-	int cur_y;
-	struct task_struct *cur_task;
-	struct queue *kbq;
+struct tty_struct {
+    char map[TTY_MAP_SIZE];
+    int cur_x;
+    int cur_y;
+    struct task_struct *cur_task;
+    struct queue *kbq;
 };
 
 extern struct tty_struct *cur_tty;

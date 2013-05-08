@@ -30,62 +30,62 @@ extern struct task_struct *current;
 	0,0,0,0,0,0,0,NULL,NULL,NULL,NULL,0,0,0,\
 	ttys[0],task0_pagelist_init,tss_init}
 
-struct tss_struct{
-	uint32 backlink;/*high 16bits reserved*/
-	uint32 esp0;
-	uint32 ss0;	/*high 16bits reserved*/
-	uint32 esp1;
-	uint32 ss1;/*high 16bits reserved*/
-	uint32 esp2;
-	uint32 ss2;/*high 16bits reserved*/
-	uint32 cr3;
-	uint32 eip;
-	uint32 eflags;
-	uint32 eax,ecx,edx,ebx;
-	uint32 esp,ebp,esi,edi;
-	uint32 es,cs,ss,ds,fs,gs;/*high 16bits reserved*/
-	uint32 ldt;/*high 16bits reserved*/
-	uint32 t_mark:1;
-	uint32 reserved:15;
-	uint32 iomap:16;
+struct tss_struct {
+    uint32 backlink;/*high 16bits reserved*/
+    uint32 esp0;
+    uint32 ss0;	/*high 16bits reserved*/
+    uint32 esp1;
+    uint32 ss1;/*high 16bits reserved*/
+    uint32 esp2;
+    uint32 ss2;/*high 16bits reserved*/
+    uint32 cr3;
+    uint32 eip;
+    uint32 eflags;
+    uint32 eax, ecx, edx, ebx;
+    uint32 esp, ebp, esi, edi;
+    uint32 es, cs, ss, ds, fs, gs; /*high 16bits reserved*/
+    uint32 ldt;/*high 16bits reserved*/
+    uint32 t_mark: 1;
+    uint32 reserved: 15;
+    uint32 iomap: 16;
 };
 
-struct task_struct{
-	uint32 state; /*TASK_XXX*/
-	uint32 counter; /* time slice*/
-	uint32 priority;
+struct task_struct {
+    uint32 state; /*TASK_XXX*/
+    uint32 counter; /* time slice*/
+    uint32 priority;
 
-	uint32 signal;
-	uint32 sig_block;
+    uint32 signal;
+    uint32 sig_block;
 
-	int exit_code;
-	uint32 start_code;
-	uint32 end_code;
-	uint32 end_data;
-	uint32 brk;/*length of code+data*/
-	uint32 start_stack;
-	uint32 pid;
+    int exit_code;
+    uint32 start_code;
+    uint32 end_code;
+    uint32 end_data;
+    uint32 brk;/*length of code+data*/
+    uint32 start_stack;
+    uint32 pid;
 
-	/* we don't have task group and session either*/
+    /* we don't have task group and session either*/
 
-	struct task_struct *father_ptr;
-	struct task_struct *latest_child_ptr;/*newest child task of father*/
-	struct task_struct *younger_ptr;/*child task created after me*/
-	struct task_struct *older_ptr;/*child task created before me*/
-	uint32 usertime;
-	uint32 systime;/*jiffies*/
-	uint32 start_time;
+    struct task_struct *father_ptr;
+    struct task_struct *latest_child_ptr;/*newest child task of father*/
+    struct task_struct *younger_ptr;/*child task created after me*/
+    struct task_struct *older_ptr;/*child task created before me*/
+    uint32 usertime;
+    uint32 systime;/*jiffies*/
+    uint32 start_time;
 
-	struct tty_struct * volatile tty;
+    struct tty_struct * volatile tty;
 
-	/* we don't have keys on file system now:(*/
-	struct mm_struct mm;
-	struct tss_struct tss;
+    /* we don't have keys on file system now:(*/
+    struct mm_struct mm;
+    struct tss_struct tss;
 };
 
-union task_page{
-	struct task_struct task;
-	char kernel_stack[PAGE_SIZE];
+union task_page {
+    struct task_struct task;
+    char kernel_stack[PAGE_SIZE];
 };
 
 #define move_to_user_mode() \
